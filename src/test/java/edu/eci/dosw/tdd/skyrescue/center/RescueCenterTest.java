@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -84,5 +87,78 @@ class RescueCenterTest {
                 IllegalArgumentException.class,
                 () -> rescueCenter.completeMission("M999"));
     }
+
+    @Test
+    void shouldNotRegisterDroneWithEmptyId() {
+        // Arrange
+        String id = "";
+        String model = "DJI Mini 5";
+        int maxRangeKm = 200;
+
+        // Act
+        Drone drone = new Drone(id, model, maxRangeKm);
+
+        // Assert
+        assertFalse(rescueCenter.addDrone(drone));
+    }
+
+    @Test
+    void shouldNotAssignMissionToNotAvailableDrone(){
+        // Arrange
+        String droneId = "D01";
+        String droneModel = "DJI Mini 5";
+        int droneMaxRangeKm = 200;
+
+        String operatorId = "O01";
+        String operatorName = "Pedro Perez";
+
+        String missionLocation = "Bogotá";
+        int missionDistanceKm = 100;
+
+        // Act
+        Drone drone = new Drone(droneId, droneModel, droneMaxRangeKm);
+        RescueOperator rOperator = new RescueOperator(operatorId, operatorName);
+
+        rescueCenter.addOperator(rOperator);
+        rescueCenter.addDrone(drone);
+        drone.setAvailable(false);
+
+        //Assert
+        assertThrows(IllegalStateException.class, () -> rescueCenter.assignMission(operatorId, 
+            droneId, missionLocation, missionDistanceKm));
+        
+    }
+
+    @Test 
+    void shouldNotCompleteMissionTwice(){
+        //Arrange
+        String droneId = "D01";
+        String droneModel = "DJI Mini 5";
+        int droneMaxRangeKm = 200;
+
+        String operatorId = "O01";
+        String operatorName = "Pedro Perez";
+
+        String missionId = "M1";
+        String missionLocation = "Bogotá";
+        int missionDistanceKm = 100;
+        LocalDateTime missionStartDate = LocalDateTime.now();
+        MissionStatus missionStatus = MissionStatus.ACTIVE;
+
+        //Act
+        Drone drone = new Drone(droneId, droneModel, droneMaxRangeKm);
+        RescueOperator rOperator = new RescueOperator(operatorId, operatorName);
+        Mission mission = new Mission(missionId, missionLocation, missionDistanceKm, 
+            drone, rOperator, missionStartDate, missionStatus);
+
+        rescueCenter.addDrone(drone);
+        rescueCenter.addOperator(rOperator);
+        rescueCenter.assignMission(operatorId, droneId, missionLocation, missionDistanceKm);
+        rescueCenter.completeMission(missionId);
+
+        //Assert
+        assertThrows(IllegalStateException.class, () -> rescueCenter.completeMission(missionId));
+    }
+    
 
 }
