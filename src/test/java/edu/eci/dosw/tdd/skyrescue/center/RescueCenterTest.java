@@ -159,6 +159,16 @@ class RescueCenterTest {
         //Assert
         assertThrows(IllegalStateException.class, () -> rescueCenter.completeMission(missionId));
     }
+
+    @Test
+    void shouldNotRegisterTwoDronesWithSameId(){
+        Drone drone1 = new Drone("D5", "Pro-Max", 25);
+        Drone drone2 = new Drone("D5", "Mini", 5);
+        boolean register1 = rescueCenter.addDrone(drone1);
+        boolean register2 = rescueCenter.addDrone(drone2);
+        assertTrue(register1);
+        assertFalse(register2);
+    }
     
 
 }
