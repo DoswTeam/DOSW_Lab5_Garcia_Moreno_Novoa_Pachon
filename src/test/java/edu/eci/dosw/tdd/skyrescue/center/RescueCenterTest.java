@@ -58,4 +58,10 @@ class RescueCenterTest {
         assertTrue(drone.isAvailable());
     }
 
+    @Test
+    void shouldReturnFalseWhenAddingNullDrone() {
+        boolean result = rescueCenter.addDrone(null);
+        assertFalse(result);
+    }
+
 }
