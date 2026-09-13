@@ -170,5 +170,12 @@ class RescueCenterTest {
         assertFalse(register2);
     }
     
+    @Test 
+    void shouldNotAssignMissionWithDistanceExceedingRange(){
+        Drone drone = new Drone("D6", "Small", 4);
+        RescueOperator rOperator = new RescueOperator("RO", "Daniel");
+        assertThrows(IllegalArgumentException.class,() -> {new Mission("M1", "Medellin", 45, 
+                drone, rOperator, LocalDateTime.now(), MissionStatus.ACTIVE);});
+    }
 
 }
