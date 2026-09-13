@@ -98,6 +98,33 @@ class RescueCenterTest {
         // Assert
         assertFalse(rescueCenter.addDrone(drone));
     }
+
+    @Test
+    void shouldNotAssignMissionToNotAvailableDrone(){
+        // Arrange
+        String droneId = "D01";
+        String droneModel = "DJI Mini 5";
+        int droneMaxRangeKm = 200;
+
+        String operatorId = "O01";
+        String operatorName = "Pedro Perez";
+
+        String missionLocation = "Bogotá";
+        int missionDistanceKm = 100;
+
+        // Act
+        Drone drone = new Drone(droneId, droneModel, droneMaxRangeKm);
+        RescueOperator rOperator = new RescueOperator(operatorId, operatorName);
+
+        rescueCenter.addOperator(rOperator);
+        rescueCenter.addDrone(drone);
+        drone.setAvailable(false);
+
+        //Assert
+        assertThrows(IllegalStateException.class, () -> rescueCenter.assignMission(operatorId, 
+            droneId, missionLocation, missionDistanceKm));
+        
+    }
     
 
 }
