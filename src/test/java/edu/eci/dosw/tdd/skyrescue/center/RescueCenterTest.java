@@ -78,5 +78,11 @@ class RescueCenterTest {
                         "Calle 10 con Carrera 5",
                         10));
     }
+    @Test
+    void shouldThrowExceptionWhenMissionDoesNotExist() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> rescueCenter.completeMission("M999"));
+    }
 
 }
