@@ -129,9 +129,9 @@ class RescueCenterTest {
         
     }
 
-    @Test 
-    void shouldNotCompleteMissionTwice(){
-        //Arrange
+    @Test
+    void shouldNotCompleteMissionTwice() {
+        // Arrange
         String droneId = "D01";
         String droneModel = "DJI Mini 5";
         int droneMaxRangeKm = 200;
@@ -139,25 +139,22 @@ class RescueCenterTest {
         String operatorId = "O01";
         String operatorName = "Pedro Perez";
 
-        String missionId = "M1";
         String missionLocation = "Bogotá";
         int missionDistanceKm = 100;
-        LocalDateTime missionStartDate = LocalDateTime.now();
-        MissionStatus missionStatus = MissionStatus.ACTIVE;
 
-        //Act
         Drone drone = new Drone(droneId, droneModel, droneMaxRangeKm);
         RescueOperator rOperator = new RescueOperator(operatorId, operatorName);
-        Mission mission = new Mission(missionId, missionLocation, missionDistanceKm, 
-            drone, rOperator, missionStartDate, missionStatus);
+        RescueCenter rCenter = new RescueCenter();
 
-        rescueCenter.addDrone(drone);
-        rescueCenter.addOperator(rOperator);
-        rescueCenter.assignMission(operatorId, droneId, missionLocation, missionDistanceKm);
-        rescueCenter.completeMission(missionId);
+        rCenter.addDrone(drone);
+        rCenter.addOperator(rOperator);
 
-        //Assert
-        assertThrows(IllegalStateException.class, () -> rescueCenter.completeMission(missionId));
+        // Act
+        Mission mission = rCenter.assignMission(operatorId, droneId, missionLocation, missionDistanceKm);
+        rCenter.completeMission(mission.getId()); // primera vez: OK
+
+        // Assert
+        assertThrows(IllegalStateException.class, () -> rCenter.completeMission(mission.getId()));
     }
 
     @Test
