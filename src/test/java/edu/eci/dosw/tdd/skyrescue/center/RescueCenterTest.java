@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -62,6 +63,20 @@ class RescueCenterTest {
     void shouldReturnFalseWhenAddingNullDrone() {
         boolean result = rescueCenter.addDrone(null);
         assertFalse(result);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenDroneDoesNotExist() {
+        RescueOperator operator = new RescueOperator("O1", "Ana Torres");
+        rescueCenter.addOperator(operator);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> rescueCenter.assignMission(
+                        "O1",
+                        "D999",
+                        "Calle 10 con Carrera 5",
+                        10));
     }
 
 }
