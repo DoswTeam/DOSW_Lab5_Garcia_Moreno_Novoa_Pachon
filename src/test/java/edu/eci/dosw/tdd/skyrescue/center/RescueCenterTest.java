@@ -43,4 +43,19 @@ class RescueCenterTest {
         assertFalse(drone.isAvailable());
     }
 
+    @Test
+    void shouldCompleteAnActiveMission() {
+        RescueOperator operator = new RescueOperator("O1", "Ana Torres");
+        Drone drone = new Drone("D1", "DJI Mini 4K", 15);
+        rescueCenter.addOperator(operator);
+        rescueCenter.addDrone(drone);
+        Mission activeMission = rescueCenter.assignMission("O1", "D1", "Calle 10 con Carrera 5", 10);
+
+        Mission completed = rescueCenter.completeMission(activeMission.getId());
+
+        assertEquals(MissionStatus.COMPLETED, completed.getStatus());
+        assertNotNull(completed.getEndDate());
+        assertTrue(drone.isAvailable());
+    }
+
 }
