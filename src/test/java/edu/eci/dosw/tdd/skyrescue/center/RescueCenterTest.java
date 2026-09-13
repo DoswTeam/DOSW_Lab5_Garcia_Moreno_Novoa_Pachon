@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -124,6 +127,37 @@ class RescueCenterTest {
         assertThrows(IllegalStateException.class, () -> rescueCenter.assignMission(operatorId, 
             droneId, missionLocation, missionDistanceKm));
         
+    }
+
+    @Test 
+    void shouldNotCompleteMissionTwice(){
+        //Arrange
+        String droneId = "D01";
+        String droneModel = "DJI Mini 5";
+        int droneMaxRangeKm = 200;
+
+        String operatorId = "O01";
+        String operatorName = "Pedro Perez";
+
+        String missionId = "M1";
+        String missionLocation = "Bogotá";
+        int missionDistanceKm = 100;
+        LocalDateTime missionStartDate = LocalDateTime.now();
+        MissionStatus missionStatus = MissionStatus.ACTIVE;
+
+        //Act
+        Drone drone = new Drone(droneId, droneModel, droneMaxRangeKm);
+        RescueOperator rOperator = new RescueOperator(operatorId, operatorName);
+        Mission mission = new Mission(missionId, missionLocation, missionDistanceKm, 
+            drone, rOperator, missionStartDate, missionStatus);
+
+        rescueCenter.addDrone(drone);
+        rescueCenter.addOperator(rOperator);
+        rescueCenter.assignMission(operatorId, droneId, missionLocation, missionDistanceKm);
+        rescueCenter.completeMission(missionId);
+
+        //Assert
+        assertThrows(IllegalStateException.class, () -> rescueCenter.completeMission(missionId));
     }
     
 
