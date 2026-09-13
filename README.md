@@ -29,23 +29,23 @@ Las tres operaciones desarrolladas con TDD son `addDrone`, `assignMission` y `co
 
 ## Evidencia TDD
 
-### Ciclo TDD - registrar un dron válido (`addDrone`)
+### Ciclo TDD - registrar un dron inválido (`addDrone`)
 
-**RED:** prueba que demuestra que un dron válido aún no puede registrarse.
+**RED:** prueba que demuestra que no se puede añadir un dron con un id vacío.
 
 ![Prueba fallando](docs/evidence/tdd-add-drone-red.png)
 
-**GREEN:** implementación mínima que hace pasar la prueba.
+**GREEN:** se verifica que el id del dron no sea un String vacio antes de guaradrlo en el centro de rescate.
 
 ![Prueba pasando](docs/evidence/tdd-add-drone-green.png)
 
-**REFACTOR:** [breve explicación del cambio realizado]
+**REFACTOR:** se añadió la verificación de que el id del dron no sea nulo ni sea un espacio en blanco.
 
 ---
 
 ### Ciclo TDD - asignación de misión (`assignMission`)
 
-**RED:** prueba que demuestra que no se puede asignar una misión con operador y dron válidos.
+**RED:** prueba que demuestra que no se puede asignar una misión con un dron que no esté disponible
 
 ![Prueba fallando](docs/evidence/tdd-assign-mission-red.png)
 
@@ -53,21 +53,7 @@ Las tres operaciones desarrolladas con TDD son `addDrone`, `assignMission` y `co
 
 ![Prueba pasando](docs/evidence/tdd-assign-mission-green.png)
 
-**REFACTOR:** [breve explicación del cambio realizado]
-
----
-
-### Ciclo TDD - cierre de misión (`completeMission`)
-
-**RED:** prueba que demuestra que una misión activa aún no puede cerrarse.
-
-![Prueba fallando](docs/evidence/tdd-complete-mission-red.png)
-
-**GREEN:** implementación mínima que hace pasar la prueba.
-
-![Prueba pasando](docs/evidence/tdd-complete-mission-green.png)
-
-**REFACTOR:** [breve explicación del cambio realizado]
+**REFACTOR:** se añade `else` a la estructura para conservar las buenas prácticas según las pruebas estáticas.
 
 ---
 
