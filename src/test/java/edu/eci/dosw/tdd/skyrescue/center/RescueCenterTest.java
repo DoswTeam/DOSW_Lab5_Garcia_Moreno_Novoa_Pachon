@@ -174,8 +174,35 @@ class RescueCenterTest {
     void shouldNotAssignMissionWithDistanceExceedingRange(){
         Drone drone = new Drone("D6", "Small", 4);
         RescueOperator rOperator = new RescueOperator("RO", "Daniel");
-        assertThrows(IllegalArgumentException.class,() -> {new Mission("M1", "Medellin", 45, 
-                drone, rOperator, LocalDateTime.now(), MissionStatus.ACTIVE);});
+        assertThrows(IllegalArgumentException.class,() -> {
+            rescueCenter.addDrone(drone);
+            rescueCenter.addOperator(rOperator);
+            rescueCenter.assignMission("RO", "D6", "Medellin", 10);
+        });
+    }
+
+    @Test
+    void shouldCloseMissionWithoutModifyingActiveOne(){
+        Drone drone = new Drone("D6", "Small", 4);
+        RescueOperator rOperator = new RescueOperator("RO", "Daniel");
+        rescueCenter.addDrone(drone);
+        rescueCenter.addOperator(rOperator);
+        Mission mission1 = rescueCenter.assignMission("RO", "D6", "Medellin", 2);
+
+        Drone drone2 = new Drone("D7", "Medium", 10);
+        RescueOperator rOperator2 = new RescueOperator("RO2", "Paco");
+        rescueCenter.addDrone(drone2);
+        rescueCenter.addOperator(rOperator2);
+        Mission mission2 = rescueCenter.assignMission("RO2", "D7", "Cali", 5);
+
+        assertEquals(MissionStatus.ACTIVE, mission1.getStatus());
+        assertEquals(MissionStatus.ACTIVE, mission2.getStatus());
+
+        rescueCenter.completeMission(mission2.getId());
+
+        assertEquals(MissionStatus.COMPLETED, mission2.getStatus());
+        assertEquals(MissionStatus.ACTIVE, mission1.getStatus());
+        assertTrue(drone.isAvailable());
     }
 
 }
