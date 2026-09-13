@@ -1,23 +1,25 @@
 package edu.eci.dosw.tdd.skyrescue.center;
 
-//import edu.eci.dosw.tdd.skyrescue.drone.Drone;
-//import edu.eci.dosw.tdd.skyrescue.mission.Mission;
-//import edu.eci.dosw.tdd.skyrescue.mission.MissionStatus;
-//import edu.eci.dosw.tdd.skyrescue.operator.RescueOperator;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertFalse;
-//import static org.junit.jupiter.api.Assertions.assertNotNull;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
+import edu.eci.dosw.tdd.skyrescue.drone.Drone;
 
-public class RescueCenterTest {
+
+class RescueCenterTest {
     private RescueCenter rescueCenter;
 
     @BeforeEach
     void setUp() {
         rescueCenter = new RescueCenter();
+    }
+
+    @Test
+    void shouldRegisterDroneWhenDataIsValid() {
+        Drone drone = new Drone("D1", "DJI Mini 4K", 15);
+        boolean registered = rescueCenter.addDrone(drone);
+        assertTrue(registered);
     }
 
 }
