@@ -63,8 +63,8 @@ Las tres operaciones desarrolladas con TDD son `addDrone`, `assignMission` y `co
 
 When running the initial tests, all methods executed correctly, but the code coverage was 81%. Therefore, the methods that were not yet covered were identified and distributed among the team members to add the necessary tests and reach a minimum coverage of 85%.
 
-![initial coverage](docs/evidence/Working-tests-jacoco.png)
-![Initial coverage](docs/evidence/initial-jacoco-percentage.png)
+![initial coverage](docs/evidence/Working-tests-jacoco.jpeg)
+![Initial coverage](docs/evidence/initial-jacoco-percentage.jpeg)
 
 ### Cobertura final
 
