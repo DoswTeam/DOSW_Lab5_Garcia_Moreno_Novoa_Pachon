@@ -68,7 +68,10 @@ When running the initial tests, all methods executed correctly, but the code cov
 
 ### Cobertura final
 
-![Cobertura final](docs/evidence/evidence firts.png)
+Once the new tests were run, the build was successful, and we were able to access the JaCoCo report.
+
+![Cobertura final](docs/evidence/final-build-jacoco.png)
+![Cobertura final](docs/evidence/coverage-final.png)
 
 ---
 
