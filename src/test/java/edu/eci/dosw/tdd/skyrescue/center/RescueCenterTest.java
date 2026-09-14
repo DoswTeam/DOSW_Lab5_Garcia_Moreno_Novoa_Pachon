@@ -199,7 +199,7 @@ class RescueCenterTest {
 
         assertEquals(MissionStatus.COMPLETED, mission2.getStatus());
         assertEquals(MissionStatus.ACTIVE, mission1.getStatus());
-        assertTrue(drone.isAvailable());
+        assertFalse(drone.isAvailable());
     }
 
 }
