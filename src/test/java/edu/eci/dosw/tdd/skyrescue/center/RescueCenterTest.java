@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -144,17 +142,16 @@ class RescueCenterTest {
 
         Drone drone = new Drone(droneId, droneModel, droneMaxRangeKm);
         RescueOperator rOperator = new RescueOperator(operatorId, operatorName);
-        RescueCenter rCenter = new RescueCenter();
 
-        rCenter.addDrone(drone);
-        rCenter.addOperator(rOperator);
+        rescueCenter.addDrone(drone);
+        rescueCenter.addOperator(rOperator);
 
         // Act
-        Mission mission = rCenter.assignMission(operatorId, droneId, missionLocation, missionDistanceKm);
-        rCenter.completeMission(mission.getId()); // primera vez: OK
+        Mission mission = rescueCenter.assignMission(operatorId, droneId, missionLocation, missionDistanceKm);
+        rescueCenter.completeMission(mission.getId()); // primera vez: OK
 
         // Assert
-        assertThrows(IllegalStateException.class, () -> rCenter.completeMission(mission.getId()));
+        assertThrows(IllegalStateException.class, () -> rescueCenter.completeMission(mission.getId()));
     }
 
     @Test
