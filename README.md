@@ -7,11 +7,12 @@
 
 ## Integrantes
 
-- Jerónimo Moreno Herrera
-- [Nombre 2]
-- [Nombre 3]
-- [Nombre 4]
-
+| Nombre completo                       | Correo institucional                                                                        | Usuario de GitHub | Correo de GitHub                                                                            |
+| ------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------- |
+| **Jeronimo Moreno H.**                | [jeronimo.moreno-h@mail.escuelaing.edu.co](mailto:jeronimo.moreno-h@mail.escuelaing.edu.co) | **Dracodec113**   | [jeronimo.moreno-h@mail.escuelaing.edu.co](mailto:jeronimo.moreno-h@mail.escuelaing.edu.co) |
+| **Derly Pachón Pinzón**               | [derly.pachon-p@mail.escuelaing.edu.co](mailto:derly.pachon-p@mail.escuelaing.edu.co)       | **itsValePp**     | [dv.pachonpinzon@gmail.com](mailto:dv.pachonpinzon@gmail.com)                               |
+| **Paula Alejandra Novoa Castellanos** | [paula.novoa-c@mail.escuelaing.edu.co](mailto:paula.novoa-c@mail.escuelaing.edu.co)         | **Aleja15-31**    | [paula.novoa-c@mail.escuelaing.edu.co](mailto:paula.novoa-c@mail.escuelaing.edu.co)         |
+| **José Daniel Gracía Pineda** | [jose.gpineda@mail.escuelaing.edu.co](mailto:jose.gpineda@mail.escuelaing.edu.co)         | **Kenji-Master**    | [jose.gpineda@mail.escuelaing.edu.co](mailto:jose.gpineda@mail.escuelaing.edu.co)         |
 ---
 
 ## Descripción de SkyRescue
@@ -68,7 +69,7 @@ When running the initial tests, all methods executed correctly, but the code cov
 
 ### Cobertura final
 
-![Cobertura final](docs/evidence/evidence firts.png)
+![Cobertura final](docs/evidence/last-jacoco-percentage.png)
 
 ---
 
@@ -86,24 +87,21 @@ Captura del dashboard con análisis terminado, cobertura, issues encontrados y e
 
 - PR JUnit: #[1](https://github.com/DoswTeam/DOSW_Lab5_Garcia_Moreno_Novoa_Pachon/pull/1)
 - PR clases base: #[2](https://github.com/DoswTeam/DOSW_Lab5_Garcia_Moreno_Novoa_Pachon/pull/2)
-- PR TDD addDrone: #[3]()
-- PR TDD assignMission: #[4]()
-- PR TDD completeMission: #[5]()
-- PR JaCoCo: #[6]()
-- PR SonarQube: #[7]()
+- PR tdd: #[3](https://github.com/DoswTeam/DOSW_Lab5_Garcia_Moreno_Novoa_Pachon/pull/7)
+- PR JaCoCo: #[6](https://github.com/DoswTeam/DOSW_Lab5_Garcia_Moreno_Novoa_Pachon/pull/13)
 
 ---
 
 ## Reflexión técnica
 
 1. **¿Qué error o comportamiento inesperado fue detectado primero gracias a una prueba?**
-   [respuesta del equipo]
+   Llamabamos la misión previo a que fuera instanciada, generando errores en los que la misión era nula.
 
 2. **¿Qué parte del código cambió durante REFACTOR sin modificar el comportamiento?**
-   [respuesta del equipo]
+   Se cambió la forma en la que se instanciaba el rescue center. Estabamos instanciando múltiples rescue centers.
 
 3. **¿Qué casos adicionales aparecieron al revisar la cobertura?**
-   [respuesta del equipo]
+   Que el assignment no fuera invalido, que se rechazara una distancia negativa en sus menciones, que se rechazara una segunda misión activa y que se rechazara un id nulo para las misiones.
 
 4. **¿Qué hallazgo de SonarQube produjo un cambio real en el código?**
-   [respuesta del equipo]
+   Mediante el esfuerzo del equipo, realizamos un trabajo sinérgico en el que sonarqube permitió la aprobación del proyecto instantáneamente.
