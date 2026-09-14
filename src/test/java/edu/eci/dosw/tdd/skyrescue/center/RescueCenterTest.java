@@ -129,21 +129,15 @@ class RescueCenterTest {
 
     @Test
     void shouldNotRegisterDroneWithEmptyId() {
-        // Arrange
         String id = "";
         String model = "DJI Mini 5";
         int maxRangeKm = 200;
-
-        // Act
         Drone drone = new Drone(id, model, maxRangeKm);
-
-        // Assert
         assertFalse(rescueCenter.addDrone(drone));
     }
 
     @Test
     void shouldNotAssignMissionToNotAvailableDrone(){
-        // Arrange
         String droneId = "D01";
         String droneModel = "DJI Mini 5";
         int droneMaxRangeKm = 200;
@@ -154,7 +148,6 @@ class RescueCenterTest {
         String missionLocation = "Bogotá";
         int missionDistanceKm = 100;
 
-        // Act
         Drone drone = new Drone(droneId, droneModel, droneMaxRangeKm);
         RescueOperator rOperator = new RescueOperator(operatorId, operatorName);
 
@@ -162,7 +155,6 @@ class RescueCenterTest {
         rescueCenter.addDrone(drone);
         drone.setAvailable(false);
 
-        //Assert
         assertThrows(IllegalStateException.class, () -> rescueCenter.assignMission(operatorId, 
             droneId, missionLocation, missionDistanceKm));
         
@@ -170,7 +162,6 @@ class RescueCenterTest {
 
     @Test
     void shouldNotCompleteMissionTwice() {
-        // Arrange
         String droneId = "D01";
         String droneModel = "DJI Mini 5";
         int droneMaxRangeKm = 200;
@@ -187,11 +178,9 @@ class RescueCenterTest {
         rescueCenter.addDrone(drone);
         rescueCenter.addOperator(rOperator);
 
-        // Act
         Mission mission = rescueCenter.assignMission(operatorId, droneId, missionLocation, missionDistanceKm);
         rescueCenter.completeMission(mission.getId()); // primera vez: OK
 
-        // Assert
         assertThrows(IllegalStateException.class, () -> rescueCenter.completeMission(mission.getId()));
     }
 
