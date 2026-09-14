@@ -28,7 +28,22 @@ replay_pid*
 
 # Build target
 target/
+build/
+bin/
+out/
 
 # Archivos del sistema operativo
 .DS_Store
 Thumbs.db
+
+# Archivos de entorno y propiedades locales (Tokens y Contraseñas)
+*.env
+*.env.local
+*.properties
+!src/main/resources/*.properties
+!src/test/resources/*.properties
+sonar-project.properties
+
+# SonarQube
+.scannerwork/
+.sonar/
